@@ -44,7 +44,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Stairs: {fileID: 0}
-  horizontalDoor: {fileID: 0}
-  verticalDoor: {fileID: 0}
+  horizontalDoor: {fileID: 5692808808640164717, guid: 0d7d9485006e1d54e9fa88e9be1316da,
+    type: 3}
+  verticalDoor: {fileID: 3324331348743788197, guid: 9e08c2eeec9bf244db2bbffd6ed6e18d,
+    type: 3}
   skeletonKey: {fileID: 0}
   goldKey: {fileID: 0}

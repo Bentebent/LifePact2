@@ -25,6 +25,11 @@ public class MapGenDebug : MonoBehaviour
             MapManager.Instance.GenerateMap(Seed, Level);
         }
 
+        if (Input.GetKeyDown(KeyCode.P))
+        {
+            MapManager.Instance.PopulateMap(Level);
+        }
+
         if (Input.GetKeyDown(KeyCode.KeypadPlus))
         {
             MapManager.Instance.GenerateMap(++Seed, Level);

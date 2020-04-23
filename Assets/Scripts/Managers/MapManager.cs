@@ -71,7 +71,7 @@ public class MapManager : MonoBehaviour
 
     private void OnDrawGizmos()
     {
-        if (DrawDebug)
+        if (DrawDebug && _map != null)
         {
             _map.DrawDebug();
         }

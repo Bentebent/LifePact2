@@ -49,9 +49,9 @@ public class MapPopulator
         //player.transform.position = map.GetRandomPositionInRoom(1, 1, startAndGoal.Item1).ToVector3();
         //CameraManager.Instance.SetCameraPosition(player.transform.position);
 
-        map.AddInteractiveObject(GameObject.Instantiate(_interactiveObjectContainer.Stairs,
-            map.GetRandomPositionInRoom(2, 2, startAndGoal.Item2).ToVector3(), Quaternion.identity));
-        startAndGoal.Item2.ContainsStairs = true;
+        //map.AddInteractiveObject(GameObject.Instantiate(_interactiveObjectContainer.Stairs,
+        //    map.GetRandomPositionInRoom(2, 2, startAndGoal.Item2).ToVector3(), Quaternion.identity));
+        //startAndGoal.Item2.ContainsStairs = true;
 
         _timer.Start();
 
@@ -235,20 +235,20 @@ public class MapPopulator
             rooms.RemoveAll(x => x.Equals(target));
             keyRoom = FindKeyRoom(spawnRoom, target, rooms, map);
 
-            Key newKey = null;
-            if (goldKey)
-            {
-                newKey = GameObject.Instantiate(_interactiveObjectContainer.goldKey, map.GetRandomPositionInRoom(1, 1, keyRoom, 100).ToVector3(),
-                    Quaternion.identity).GetComponent<Key>();
-
-                map.AddInteractiveObject(newKey.gameObject);
-                keyRoom.Keys.Add(newKey.gameObject);
-            }
-
-            doors.ForEach(x =>
-            {
-                x.IsGoalDoor = goldKey;
-            });
+            //Key newKey = null;
+            //if (goldKey)
+            //{
+            //    newKey = GameObject.Instantiate(_interactiveObjectContainer.goldKey, map.GetRandomPositionInRoom(1, 1, keyRoom, 100).ToVector3(),
+            //        Quaternion.identity).GetComponent<Key>();
+            //
+            //    map.AddInteractiveObject(newKey.gameObject);
+            //    keyRoom.Keys.Add(newKey.gameObject);
+            //}
+            //
+            //doors.ForEach(x =>
+            //{
+            //    x.IsGoalDoor = goldKey;
+            //});
 
             return true;
         }
