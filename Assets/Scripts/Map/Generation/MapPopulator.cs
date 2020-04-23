@@ -235,20 +235,21 @@ public class MapPopulator
             rooms.RemoveAll(x => x.Equals(target));
             keyRoom = FindKeyRoom(spawnRoom, target, rooms, map);
 
-            //Key newKey = null;
-            //if (goldKey)
-            //{
-            //    newKey = GameObject.Instantiate(_interactiveObjectContainer.goldKey, map.GetRandomPositionInRoom(1, 1, keyRoom, 100).ToVector3(),
-            //        Quaternion.identity).GetComponent<Key>();
-            //
-            //    map.AddInteractiveObject(newKey.gameObject);
-            //    keyRoom.Keys.Add(newKey.gameObject);
-            //}
-            //
-            //doors.ForEach(x =>
-            //{
-            //    x.IsGoalDoor = goldKey;
-            //});
+            Key newKey = null;
+            if (goldKey)
+            {
+                newKey = GameObject.Instantiate(_interactiveObjectContainer.goldKey,
+                    map.GetRandomPositionInRoom(1, 1, keyRoom, 100).ToVector3(),
+                    Quaternion.identity).GetComponent<Key>();
+            
+                map.AddInteractiveObject(newKey.gameObject);
+                keyRoom.Keys.Add(newKey.gameObject);
+            }
+            
+            doors.ForEach(x =>
+            {
+                x.IsGoalDoor = goldKey;
+            });
 
             return true;
         }
@@ -256,10 +257,8 @@ public class MapPopulator
         return false;
     }
     
-    private MapNode FindKeyRoom(MapNode spawnRoom, MapNode target, List<MapNode> rooms, Map map = null, bool doAstar= false)
+    private MapNode FindKeyRoom(MapNode spawnRoom, MapNode target, List<MapNode> rooms, Map map, bool doAstar= false)
     {
-        return null;
-        /*
         List<Tuple<MapNode, float>> distances = new List<Tuple<MapNode, float>>();
 
         rooms.ForEach(x =>
@@ -282,7 +281,7 @@ public class MapPopulator
             }
 
             MapNode candidate = rooms.Single(x => x.Id == distances[0].Item1.Id);
-            List<MapNode> path = NavigationManager.Instance.AStar(spawnRoom, candidate, out float distance);
+            List<MapNode> path = _navigation.AStar(spawnRoom, candidate, out float distance);
             distances.RemoveAt(0);
 
             Vector2 pos = map.GetRandomPositionInRoom(1, 1, candidate);
@@ -303,8 +302,8 @@ public class MapPopulator
                         });
                     }
 
-                    List<Vector2Int> check = NavigationManager.Instance.AStar(spawnRoom.Cell.center.ToVector2Int(),
-                        candidate.Cell.center.ToVector2Int(), out distance);
+                    List<Vector2Int> check = _navigation.AStar(spawnRoom.Cell.center.ToVector2Int(),
+                        candidate.Cell.center.ToVector2Int(), in map, out distance);
 
                     if (check.Count >= 0 && distance != float.NegativeInfinity)
                     {
@@ -327,12 +326,10 @@ public class MapPopulator
         }
 
         return result;
-        */
     }
 
     private void SpawnSkeletonKeys(Map map, MapNode spawnRoom)
     {
-        /*
         List<MapNode> rooms = new List<MapNode>();
         MapNode keyRoom = null;
         List<MapNode> result = new List<MapNode>();
@@ -344,7 +341,8 @@ public class MapPopulator
                 if (mapNode.Type == MapNodeType.Room)
                 {
                     mapNode.Corridors.Clear();
-                    List<Delaunay.Edge<MapNode>> edges = map.LayoutGraph.Where(y => y.ContainsVertex(new Delaunay.Vertex<MapNode>(mapNode.Cell.center, mapNode))).ToList();
+                    List<Delaunay.Edge<MapNode>> edges = map.LayoutGraph.Where(y => 
+                        y.ContainsVertex(new Delaunay.Vertex<MapNode>(mapNode.Cell.center, mapNode))).ToList();
                     mapNode.Corridors.AddRange(edges);
                 }
             }
@@ -359,7 +357,7 @@ public class MapPopulator
                     continue;
                 }
 
-                List<MapNode> path = NavigationManager.Instance.AStar(spawnRoom, room, out float distance);
+                List<MapNode> path = _navigation.AStar(spawnRoom, room, out float distance);
                 
                 if (path.Where(x => x.Locked).Count() == 1)
                 {
@@ -376,7 +374,8 @@ public class MapPopulator
             {
                 foreach (MapNode lockedRoom in lockedRooms)
                 {
-                    rooms[i].Corridors.RemoveAll(x => x.ContainsVertex(new Delaunay.Vertex<MapNode>(lockedRoom.Cell.center, lockedRoom)));
+                    rooms[i].Corridors.RemoveAll(x => x.ContainsVertex(
+                        new Delaunay.Vertex<MapNode>(lockedRoom.Cell.center, lockedRoom)));
                 }
             }
 
@@ -389,7 +388,8 @@ public class MapPopulator
             {
                 keyRoom = FindKeyRoom(spawnRoom, lockedRoom, rooms, map, true);
 
-                Key newKey = GameObject.Instantiate(_interactiveObjectContainer.skeletonKey, map.GetRandomPositionInRoom(1, 1, keyRoom).ToVector3(),
+                Key newKey = GameObject.Instantiate(_interactiveObjectContainer.skeletonKey, 
+                    map.GetRandomPositionInRoom(1, 1, keyRoom).ToVector3(),
                     Quaternion.identity).GetComponent<Key>();
 
                 map.AddInteractiveObject(newKey.gameObject);
@@ -406,7 +406,8 @@ public class MapPopulator
                 {
                     foreach (MapNode room in rooms)
                     {
-                        room.Corridors.RemoveAll(x => x.ContainsVertex(new Delaunay.Vertex<MapNode>(keyRoom.Cell.center, keyRoom)));
+                        room.Corridors.RemoveAll(x => 
+                            x.ContainsVertex(new Delaunay.Vertex<MapNode>(keyRoom.Cell.center, keyRoom)));
                     }
                 }
             }
@@ -419,7 +420,6 @@ public class MapPopulator
                 map.UpdateCollisionMap(y.ToRectInt(), 1);
             });
         });
-        */
     }
 
     private void PlaceTraps(Map map, MapNode spawnRoom/*, Player player*/)

@@ -2,20 +2,36 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Item : MonoBehaviour
+public abstract class Item : MonoBehaviour
 {
-	private void Awake()
-	{
-		
-	}
-	
-    private void Start()
+    [SerializeField]
+    private AudioSource _pickupSound;
+
+    [SerializeField]
+    private bool _destroyOnPickup = true;
+
+    protected virtual void Apply(GameObject owner)
     {
-        
+        Player player = owner.GetComponent<Player>();
+
+        if (player != null)
+        {
+            ApplyEffect(owner);
+            _pickupSound?.Play();
+
+            if (_destroyOnPickup)
+            {
+                Destroy(gameObject);
+            }
+        }
+    }
+    private void OnTriggerStay2D(Collider2D collision)
+    {
+        if (collision.gameObject)
+        {
+            Apply(collision.gameObject);
+        }
     }
 
-    private void Update()
-    {
-        
-    }
+    protected abstract void ApplyEffect(GameObject owner);
 }
