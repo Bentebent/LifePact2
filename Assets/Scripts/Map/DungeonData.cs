@@ -9,13 +9,13 @@ using UnityEngine;
 public class DungeonData :   MonoBehaviour
 {
     [SerializeField]
-    public MapGeneratorParameters parameters;
+    public MapGeneratorParameters Parameters;
 
     [SerializeField]
-    public TileContainer tileSet;
+    public TileContainer TileSet;
 
     [SerializeField]
-    public TileContainer pitSet;
+    public TileContainer PitSet;
 
     //[SerializeField]
     //public TrapContainer trapSet;
@@ -23,6 +23,6 @@ public class DungeonData :   MonoBehaviour
     //[SerializeField]
     //public SpawnableContainer spawnables;
 
-    //[SerializeField]
-    //public InteractiveDungeonObject interactiveObjects;
+    [SerializeField]
+    public InteractiveDungeonObjectContainer InteractiveObjects;
 }

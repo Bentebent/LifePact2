@@ -9,21 +9,24 @@ using UnityEngine.Tilemaps;
 public class MapPopulator
 {
     private LCG _random = null;
-    //private InteractiveDungeonObject _interactiveObjectContainer;
+    private InteractiveDungeonObjectContainer _interactiveObjectContainer = null;
     //private SpawnableContainer _spawnKeyframes;
     //private TrapContainer _trapContainer;
 
     private NavigationManager _navigation = null;
+    private MapPainter _mapPainter = null;
     private Timer _timer = null;
 
 
-    public void Initialize(LCG random, NavigationManager navigation/*, InteractiveDungeonObject interactiveObjectContainer, SpawnableContainer spawnKeyframes,
+    public void Initialize(LCG random, NavigationManager navigation, MapPainter mapPainter,
+        InteractiveDungeonObjectContainer interactiveObjectContainer /*, SpawnableContainer spawnKeyframes,
         TrapContainer trapContainer, */)
     {
         _timer = new Timer();
         _random = random;
         _navigation = navigation;
-        //_interactiveObjectContainer = interactiveObjectContainer;
+        _mapPainter = mapPainter;
+        _interactiveObjectContainer = interactiveObjectContainer;
         //_spawnKeyframes = spawnKeyframes;
         //_trapContainer = trapContainer;
     }
@@ -46,18 +49,16 @@ public class MapPopulator
         //player.transform.position = map.GetRandomPositionInRoom(1, 1, startAndGoal.Item1).ToVector3();
         //CameraManager.Instance.SetCameraPosition(player.transform.position);
 
-        //map.AddInteractiveObject(GameObject.Instantiate(_interactiveObjectContainer.Stairs,
-        //    map.GetRandomPositionInRoom(2, 2, startAndGoal.Item2).ToVector3(), Quaternion.identity));
+        map.AddInteractiveObject(GameObject.Instantiate(_interactiveObjectContainer.Stairs,
+            map.GetRandomPositionInRoom(2, 2, startAndGoal.Item2).ToVector3(), Quaternion.identity));
         startAndGoal.Item2.ContainsStairs = true;
 
         _timer.Start();
 
-        //GenerateDoors(ref map, startAndGoal.Item1, startAndGoal.Item2, generationParameters);
+        GenerateDoors(ref map, startAndGoal.Item1, startAndGoal.Item2, generationParameters);
 
         _timer.Stop();
         _timer.Print("MapPopulator.GenerateDoors");
-
-        //_mapPainter.PostProcessTiles(map, generationParameters);
 
         _timer.Start();
 
@@ -150,7 +151,6 @@ public class MapPopulator
 
     private bool LockRoom(Map map, MapNode spawnRoom, MapNode target, List<MapNode> rooms, out MapNode keyRoom, bool goldKey)
     {
-        /*
         keyRoom = null;
         List<Door> doors = new List<Door>();
         foreach (BoundsInt chokepoint in target.Chokepoints)
@@ -202,9 +202,7 @@ public class MapPopulator
 
             if (door != null)
             {
-                door.locked = true;
-                door.closed = true;
-
+                door.Close(true);
                 doors.Add(door);
                 map.UpdateCollisionMap(chokepoint.ToRectInt(), 1);
                 map.UpdateCollisionMap(door.Bounds, 1);
@@ -254,9 +252,7 @@ public class MapPopulator
 
             return true;
         }
-        */
 
-        keyRoom = null;
         return false;
     }
     

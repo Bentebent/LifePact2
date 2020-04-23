@@ -7,24 +7,26 @@ using UnityEngine.Tilemaps;
 
 public class MapGenerator
 {
-    private DungeonData _selectedDungeonData;
+    private DungeonData _selectedDungeonData = null;
 
-    private Tilemap _floors;
-    private Tilemap _walls;
-    private Tilemap _pits;
-    private Tilemap _statistics;
-    private Tilemap _collision;
-    private Tilemap _pitCollision;
+    private Tilemap _floors = null;
+    private Tilemap _walls = null;
+    private Tilemap _pits = null;
+    private Tilemap _statistics = null;
+    private Tilemap _collision = null;
+    private Tilemap _pitCollision = null;
 
-    private MillerParkLCG _random;
-    private Timer _timer;
+    private MillerParkLCG _random = null;
+    private NavigationManager _navigation = null;
+    private Timer _timer = null;
 
-    private MapPainter _mapPainter;
-    private MapPopulator _mapPopulator;
+    private MapPainter _mapPainter = null;
+    private MapPopulator _mapPopulator = null;
 
     public void Initialize(NavigationManager navigation, DungeonData dungeonData, Tilemap floors, Tilemap walls, 
         Tilemap pits, Tilemap statistics, Tilemap collision, Tilemap pitCollision)
     {
+        _navigation = navigation;
         _selectedDungeonData = dungeonData;
         _floors = floors;
         _walls = walls;
@@ -36,10 +38,10 @@ public class MapGenerator
         _random = new MillerParkLCG();
         _timer = new Timer();
         _mapPainter = new MapPainter();
-        _mapPainter.Initialize(_selectedDungeonData.tileSet, _selectedDungeonData.pitSet, _floors, _walls, _pits);
+        _mapPainter.Initialize(_selectedDungeonData.TileSet, _selectedDungeonData.PitSet, _floors, _walls, _pits);
 
         _mapPopulator = new MapPopulator();
-        _mapPopulator.Initialize(_random, navigation/*_selectedDungeonData.interactiveObjects, _selectedDungeonData.spawnables, 
+        _mapPopulator.Initialize(_random, navigation, _mapPainter, _selectedDungeonData.InteractiveObjects/*_selectedDungeonData.interactiveObjects, _selectedDungeonData.spawnables, 
             _selectedDungeonData.trapSet,*/);
     }
 
@@ -60,34 +62,34 @@ public class MapGenerator
         Debug.Log(seed);
 
         _timer.Start();
-        Map result = new Map(_floors, _walls, _pits, _statistics, _collision, _pitCollision, _random);
+        Map result = new Map(_floors, _walls, _pits, _statistics, _collision, _pitCollision, _random, _navigation);
 
         _random.SetSeed(seed);
                                                                                                                                                                                                              
-        GenerateCells(ref result, _selectedDungeonData.parameters);
-        SeparateCells(ref result, _selectedDungeonData.parameters);
+        GenerateCells(ref result, _selectedDungeonData.Parameters);
+        SeparateCells(ref result, _selectedDungeonData.Parameters);
 
-        if (IdentifyRooms(ref result, _selectedDungeonData.parameters) < 3)
+        if (IdentifyRooms(ref result, _selectedDungeonData.Parameters) < 3)
         {
             seed += 1;
             return GenerateMap(seed, level);
         }
 
-        Triangulate(ref result, _selectedDungeonData.parameters);
-        GenerateLayoutGraph(ref result, _selectedDungeonData.parameters);
-        GenerateCorridors(ref result, _selectedDungeonData.parameters);
-        PaintRooms(result, _selectedDungeonData.parameters);
-        _mapPainter.PaintTiles(result, _selectedDungeonData.parameters);
-        RemoveDeadRooms(ref result, _selectedDungeonData.parameters);
+        Triangulate(ref result, _selectedDungeonData.Parameters);
+        GenerateLayoutGraph(ref result, _selectedDungeonData.Parameters);
+        GenerateCorridors(ref result, _selectedDungeonData.Parameters);
+        PaintRooms(result, _selectedDungeonData.Parameters);
+        _mapPainter.PaintTiles(result, _selectedDungeonData.Parameters);
+        RemoveDeadRooms(ref result, _selectedDungeonData.Parameters);
 
-        if(FindChokepoints(ref result, _selectedDungeonData.parameters) < 2)
+        if(FindChokepoints(ref result, _selectedDungeonData.Parameters) < 2)
         {
             seed += 1;
             return GenerateMap(seed, level);
         }
 
-        GeneratePools(ref result, _selectedDungeonData.parameters);
-        _mapPainter.PostProcessTiles(in result, in _selectedDungeonData.parameters);
+        GeneratePools(ref result, _selectedDungeonData.Parameters);
+        _mapPainter.PostProcessTiles(in result, in _selectedDungeonData.Parameters);
 
         result.UpdateCollisionTilemap(true);
         result.UpdateCollisionTilemap(false);
@@ -100,7 +102,7 @@ public class MapGenerator
 
     public void PopulateMap(ref Map map, int level)
     {
-        _mapPopulator.PopulateMap(ref map,  _selectedDungeonData.parameters, level);
+        _mapPopulator.PopulateMap(ref map,  _selectedDungeonData.Parameters, level);
     }
 
     private void GenerateCells(ref Map map, in MapGeneratorParameters parameters)
@@ -498,7 +500,7 @@ public class MapGenerator
         TileBase[] wallTiles = new TileBase[size.x * size.y];
         for (int tileIndex = 0; tileIndex < size.x * size.y; tileIndex++)
         {
-            tiles[tileIndex] = _selectedDungeonData.tileSet.FloorTiles.GetRandom();
+            tiles[tileIndex] = _selectedDungeonData.TileSet.FloorTiles.GetRandom();
             wallTiles[tileIndex] = null;
         }
 

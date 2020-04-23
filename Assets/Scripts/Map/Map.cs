@@ -28,17 +28,18 @@ public class Map
     private readonly bool _drawLayout;
     private readonly bool _drawBounds;
 
-    private readonly Tilemap _floors;
-    private readonly Tilemap _walls;
-    private readonly Tilemap _pits;
-    private readonly Tilemap _statistics;
-    private readonly Tilemap _collision;
-    private readonly Tilemap _pitCollision;
+    private readonly Tilemap _floors = null;
+    private readonly Tilemap _walls = null;
+    private readonly Tilemap _pits = null;
+    private readonly Tilemap _statistics = null;
+    private readonly Tilemap _collision = null;
+    private readonly Tilemap _pitCollision = null;
 
-    private readonly LCG _random;
+    private readonly LCG _random = null;
+    private readonly NavigationManager _navigation = null;
 
     public Map(Tilemap floors, Tilemap walls, Tilemap pits, Tilemap statistics, Tilemap collision, Tilemap pitCollision, 
-        LCG random)
+        LCG random, NavigationManager navigation)
     {
         _drawCells = true;
         _drawDelaunay = false;
@@ -55,6 +56,7 @@ public class Map
         _pitCollision = pitCollision;
 
         _random = random;
+        _navigation = navigation;
 
         InteractiveObjects = new List<GameObject>();
         Enemies = new List<GameObject>();
@@ -98,23 +100,23 @@ public class Map
         Enemies.ForEach(x => x.SetActive(true));
     }
 
-    //public List<Enemy> GetEnemiesInCircle(Vector2 position, float radius)
-    //{
-    //    List<Enemy> closeEnemies = new List<Enemy>();
-    //    foreach (GameObject enemy in Enemies)
-    //    {
-    //        if (enemy == null || enemy.Equals(null))
-    //        {
-    //            continue;
-    //        }
-    //
-    //        if (Vector2.Distance(enemy.transform.position, position) <= radius)
-    //        {
-    //            closeEnemies.Add(enemy.GetComponent<Enemy>());
-    //        }
-    //    }
-    //    return closeEnemies;
-    //}
+    public List<Enemy> GetEnemiesInCircle(Vector2 position, float radius)
+    {
+        List<Enemy> closeEnemies = new List<Enemy>();
+        foreach (GameObject enemy in Enemies)
+        {
+            if (enemy == null || enemy.Equals(null))
+            {
+                continue;
+            }
+    
+            if (Vector2.Distance(enemy.transform.position, position) <= radius)
+            {
+                closeEnemies.Add(enemy.GetComponent<Enemy>());
+            }
+        }
+        return closeEnemies;
+    }
 
     public Vector2 GetPositionInMap(int widthInTiles, int heightInTiles, bool includeCorridorRooms, out MapNode room,
         List<MapNode> excludedRooms = null)
@@ -149,7 +151,7 @@ public class Map
 
         if (edgeNodes.Count == 2)
         {
-            //path = NavigationManager.Instance.AStar(edgeNodes[0], edgeNodes[1], out float distance);
+            path = _navigation.AStar(edgeNodes[0], edgeNodes[1], out float distance);
             return new Tuple<MapNode, MapNode>(edgeNodes[0], edgeNodes[1]);
         }
 
@@ -165,13 +167,13 @@ public class Map
                     continue;
                 }
 
-                //List<MapNode> tempPath = NavigationManager.Instance.AStar(edgeNodes[i], edgeNodes[j], out float distance);
-                //if (distance > maxDistance)
-                //{
-                //    path = tempPath;
-                //    maxDistance = distance;
-                //    result = new Tuple<MapNode, MapNode>(edgeNodes[i], edgeNodes[j]);
-                //}
+                List<MapNode> tempPath = _navigation.AStar(edgeNodes[i], edgeNodes[j], out float distance);
+                if (distance > maxDistance)
+                {
+                    path = tempPath;
+                    maxDistance = distance;
+                    result = new Tuple<MapNode, MapNode>(edgeNodes[i], edgeNodes[j]);
+                }
             }
         }
 
