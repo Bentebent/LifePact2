@@ -20,10 +20,10 @@ public class MapGenerator
     private Timer _timer;
 
     private MapPainter _mapPainter;
-    //private MapPopulator _mapPopulator;
+    private MapPopulator _mapPopulator;
 
-    public void Initialize(DungeonData dungeonData, Tilemap floors, Tilemap walls, Tilemap pits, Tilemap statistics,
-        Tilemap collision, Tilemap pitCollision)
+    public void Initialize(NavigationManager navigation, DungeonData dungeonData, Tilemap floors, Tilemap walls, 
+        Tilemap pits, Tilemap statistics, Tilemap collision, Tilemap pitCollision)
     {
         _selectedDungeonData = dungeonData;
         _floors = floors;
@@ -38,9 +38,9 @@ public class MapGenerator
         _mapPainter = new MapPainter();
         _mapPainter.Initialize(_selectedDungeonData.tileSet, _selectedDungeonData.pitSet, _floors, _walls, _pits);
 
-        //_mapPopulator = new MapPopulator();
-        //_mapPopulator.Initialize(_random, _selectedDungeonData.interactiveObjects, _selectedDungeonData.spawnables, 
-        //    _selectedDungeonData.trapSet, _mapPainter);
+        _mapPopulator = new MapPopulator();
+        _mapPopulator.Initialize(_random, navigation/*_selectedDungeonData.interactiveObjects, _selectedDungeonData.spawnables, 
+            _selectedDungeonData.trapSet,*/);
     }
 
     public void GetSeed()
@@ -98,10 +98,10 @@ public class MapGenerator
         return result;
     }
 
-    //public void PopulateMap(ref Map map, ref Player player, int level)
-    //{
-    //    _mapPopulator.PopulateMap(ref map, ref player, _selectedDungeonData.parameters, level);
-    //}
+    public void PopulateMap(ref Map map, int level)
+    {
+        _mapPopulator.PopulateMap(ref map,  _selectedDungeonData.parameters, level);
+    }
 
     private void GenerateCells(ref Map map, in MapGeneratorParameters parameters)
     {
@@ -727,7 +727,7 @@ public class MapGenerator
 
                 if (Mathf.PerlinNoise(xCoord, yCoord) < 0.5f)
                 {
-                    //_mapPainter.PaintPit(bounds.ToRectInt(), false);
+                    _mapPainter.PaintPit(bounds.ToRectInt(), false);
                     map.UpdateCollisionMap(bounds.ToRectInt(), 2, false);
                 }
             }

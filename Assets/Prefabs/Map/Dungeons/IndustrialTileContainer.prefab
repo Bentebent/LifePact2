@@ -1,0 +1,65 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &2814821600590342924
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7118090107916538615}
+  - component: {fileID: 7548378658250967828}
+  m_Layer: 0
+  m_Name: IndustrialTileContainer
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7118090107916538615
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2814821600590342924}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &7548378658250967828
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2814821600590342924}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dc494e8ea50dcc64dadb1c56c0872b2e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  FloorTiles:
+    _values:
+    - {fileID: 11400000, guid: c43f07c6a33ebde4da82d8ced9feb26a, type: 2}
+    - {fileID: 11400000, guid: 920d52b3d24165e4598aa2a0cb3d39a6, type: 2}
+    - {fileID: 11400000, guid: d9820a7007366b24a837e59ad39437c9, type: 2}
+    - {fileID: 11400000, guid: d71f97e888723374bb0a95c035dd2419, type: 2}
+    _priorities: 0a000000010000000100000001000000
+    _totalPriority: 13
+  TopRight: {fileID: 11400000, guid: f603680cad44b0b40856a25721f4d225, type: 2}
+  TopMiddle: {fileID: 11400000, guid: 3597784e0b994834d8e12d79b82cf06a, type: 2}
+  TopLeft: {fileID: 11400000, guid: d6192e934c6f23149a048733fd54e72a, type: 2}
+  MiddleLeft: {fileID: 11400000, guid: 309b95eb8291d964582e43689b5ac29a, type: 2}
+  MiddleRight: {fileID: 11400000, guid: 68721f47920414540936ddeb049b426c, type: 2}
+  BottomRight: {fileID: 11400000, guid: f897063eeaf1c4c438e69932dae82538, type: 2}
+  BottomMiddle: {fileID: 11400000, guid: 2ffe23d32a7d6b2479629c51c069ac32, type: 2}
+  BottomLeft: {fileID: 11400000, guid: 1e720305cb04e384cac35b56ad81e721, type: 2}
+  TopRightOuter: {fileID: 11400000, guid: d6192e934c6f23149a048733fd54e72a, type: 2}
+  TopLeftOuter: {fileID: 11400000, guid: 8b7cbac26514daf47af4aaa761d71264, type: 2}
+  BottomRightOuter: {fileID: 11400000, guid: 33fd1efc21121214ca947074c7cd999d, type: 2}
+  BottomLeftOuter: {fileID: 11400000, guid: 89a74e402b11e1b428e9cbbaffcd6545, type: 2}

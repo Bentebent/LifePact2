@@ -1,0 +1,62 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &4903661986224419047
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 132160133246535964}
+  - component: {fileID: 854617024981553407}
+  m_Layer: 0
+  m_Name: IndustrialPitTileContainer
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &132160133246535964
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4903661986224419047}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &854617024981553407
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4903661986224419047}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dc494e8ea50dcc64dadb1c56c0872b2e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  FloorTiles:
+    _values:
+    - {fileID: 11400000, guid: b92fcc811c137094b889b7742f527193, type: 2}
+    _priorities: 0a000000
+    _totalPriority: 10
+  TopRight: {fileID: 11400000, guid: 5edcee416a37142458a2755bbd34b594, type: 2}
+  TopMiddle: {fileID: 11400000, guid: 3978e20250536a74085b546dfacea45c, type: 2}
+  TopLeft: {fileID: 11400000, guid: 5adffff5477c28f4fb7f7a9922968d81, type: 2}
+  MiddleLeft: {fileID: 11400000, guid: 21bc7b85b58698c439a415c5b6978280, type: 2}
+  MiddleRight: {fileID: 11400000, guid: e89c262c7308be04aa0726c53aa33673, type: 2}
+  BottomRight: {fileID: 11400000, guid: bfe038e30087edf4882b1cd4ce0201f4, type: 2}
+  BottomMiddle: {fileID: 11400000, guid: 0f9ca97bc760a544c9f13c298ca37251, type: 2}
+  BottomLeft: {fileID: 11400000, guid: 8c748ebf3b484104983febf0b5294092, type: 2}
+  TopRightOuter: {fileID: 11400000, guid: 40b9b3af91bb64c49ae71158e091187c, type: 2}
+  TopLeftOuter: {fileID: 11400000, guid: 2304eb3e2e51e3948befe2c9f36a40e2, type: 2}
+  BottomRightOuter: {fileID: 11400000, guid: 6fe9324951133824689865b66dd01ee0, type: 2}
+  BottomLeftOuter: {fileID: 11400000, guid: e3f8f64c189ea6a4497dcbf7c98b452d, type: 2}

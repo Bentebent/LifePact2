@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &2814821600590342924
+--- !u!1 &1524685913097931943
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,22 +8,22 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 7118090107916538615}
-  - component: {fileID: 7548378658250967828}
+  - component: {fileID: 1732355584682102609}
+  - component: {fileID: 212168854466083135}
   m_Layer: 0
-  m_Name: IndustrialDungeonTileContainer
+  m_Name: IndustrialDungeonData
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &7118090107916538615
+--- !u!4 &1732355584682102609
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2814821600590342924}
+  m_GameObject: {fileID: 1524685913097931943}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
@@ -31,31 +31,30 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &7548378658250967828
+--- !u!114 &212168854466083135
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2814821600590342924}
+  m_GameObject: {fileID: 1524685913097931943}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dc494e8ea50dcc64dadb1c56c0872b2e, type: 3}
+  m_Script: {fileID: 11500000, guid: 540b3813074f1db4f90a90a933deb86a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  FloorTiles:
-    _values: []
-    _priorities: 
-    _totalPriority: 0
-  TopRight: {fileID: 0}
-  TopMiddle: {fileID: 0}
-  TopLeft: {fileID: 0}
-  MiddleLeft: {fileID: 0}
-  MiddleRight: {fileID: 0}
-  BottomRight: {fileID: 0}
-  BottomMiddle: {fileID: 0}
-  BottomLeft: {fileID: 0}
-  TopRightOuter: {fileID: 0}
-  TopLeftOuter: {fileID: 0}
-  BottomRightOuter: {fileID: 0}
-  BottomLeftOuter: {fileID: 0}
+  parameters:
+    GenerationRadius: 20
+    MaxCellCount: 150
+    MinCellCount: 75
+    MaxCellSize: 20
+    MinCellSize: 4
+    RoomThresholdMultiplier: 1.1
+    MazeFactor: 0.25
+    MinCorridorWidth: 6
+    MaxCorridorWidth: 10
+    MinRoomDistance: 1
+    LockFactor: 0.2
+    PitFrequency: 0.33
+  tileSet: {fileID: 7548378658250967828, guid: 30f46997f3e45ec4a976e54fd3470a18, type: 3}
+  pitSet: {fileID: 854617024981553407, guid: ed018e1fad3f6034fb09fb53ef8b9d0a, type: 3}
