@@ -44,4 +44,7 @@ public class MapGeneratorParameters
 
     [SerializeField]
     public float PitFrequency;
+
+    [SerializeField]
+    public float TrapDensity;
 }

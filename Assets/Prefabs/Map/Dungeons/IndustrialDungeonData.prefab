@@ -56,7 +56,9 @@ MonoBehaviour:
     MinRoomDistance: 1
     LockFactor: 0.2
     PitFrequency: 0.33
+    TrapDensity: 0.02
   TileSet: {fileID: 7548378658250967828, guid: 30f46997f3e45ec4a976e54fd3470a18, type: 3}
   PitSet: {fileID: 854617024981553407, guid: ed018e1fad3f6034fb09fb53ef8b9d0a, type: 3}
   InteractiveObjects: {fileID: 6631892745160454306, guid: 27c43ea3ca75e9d4a83834dc2f482fd7,
     type: 3}
+  TrapSet: {fileID: 4128875107699804766, guid: 2f51840439869344a854ee91a3d9985e, type: 3}

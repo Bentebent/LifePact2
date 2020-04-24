@@ -41,7 +41,8 @@ public class MapGenerator
         _mapPainter.Initialize(_selectedDungeonData.TileSet, _selectedDungeonData.PitSet, _floors, _walls, _pits);
 
         _mapPopulator = new MapPopulator();
-        _mapPopulator.Initialize(_random, navigation, _mapPainter, _selectedDungeonData.InteractiveObjects/*_selectedDungeonData.interactiveObjects, _selectedDungeonData.spawnables, 
+        _mapPopulator.Initialize(_random, navigation, _mapPainter, _selectedDungeonData.InteractiveObjects, 
+            _selectedDungeonData.TrapSet/*_selectedDungeonData.interactiveObjects, _selectedDungeonData.spawnables, 
             _selectedDungeonData.trapSet,*/);
     }
 

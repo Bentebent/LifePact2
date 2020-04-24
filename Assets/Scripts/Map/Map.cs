@@ -428,9 +428,15 @@ public class Map
         {
             for (int j = 0; j < bounds.size.y; j++)
             {
-                if(CollisionMap[bounds.xMin - Bounds.xMin + i, bounds.yMin - Bounds.yMin + j] > 0)
+                int x = bounds.xMin - Bounds.xMin + i;
+                int y = bounds.yMin - Bounds.yMin + j;
+
+                if (x >= 0 && y >= 0 && x < CollisionMap.GetLength(0) && y < CollisionMap.GetLength(1))
                 {
-                    return true;
+                    if (CollisionMap[x, y] > 0)
+                    {
+                        return true;
+                    }
                 }
             }
         }

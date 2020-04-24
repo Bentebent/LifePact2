@@ -11,7 +11,7 @@ public class MapPopulator
     private LCG _random = null;
     private InteractiveDungeonObjectContainer _interactiveObjectContainer = null;
     //private SpawnableContainer _spawnKeyframes;
-    //private TrapContainer _trapContainer;
+    private TrapContainer _trapContainer;
 
     private NavigationManager _navigation = null;
     private MapPainter _mapPainter = null;
@@ -19,16 +19,17 @@ public class MapPopulator
 
 
     public void Initialize(LCG random, NavigationManager navigation, MapPainter mapPainter,
-        InteractiveDungeonObjectContainer interactiveObjectContainer /*, SpawnableContainer spawnKeyframes,
-        TrapContainer trapContainer, */)
+        InteractiveDungeonObjectContainer interactiveObjectContainer, TrapContainer trapContainer
+        /*, SpawnableContainer spawnKeyframes,, */)
     {
         _timer = new Timer();
         _random = random;
         _navigation = navigation;
         _mapPainter = mapPainter;
         _interactiveObjectContainer = interactiveObjectContainer;
+        _trapContainer = trapContainer;
+
         //_spawnKeyframes = spawnKeyframes;
-        //_trapContainer = trapContainer;
     }
 
     public void PopulateMap(ref Map map, in MapGeneratorParameters generationParameters, int level)
@@ -69,7 +70,7 @@ public class MapPopulator
 
         _timer.Start();
 
-        //PlaceTraps(map, startAndGoal.Item1, player);
+        PlaceTraps(map, startAndGoal.Item1, generationParameters);
 
         _timer.Stop();
         _timer.Print("MapPopulator.PlaceTraps");
@@ -422,9 +423,8 @@ public class MapPopulator
         });
     }
 
-    private void PlaceTraps(Map map, MapNode spawnRoom/*, Player player*/)
+    private void PlaceTraps(Map map, MapNode spawnRoom, in MapGeneratorParameters parameters/*, Player player*/)
     {
-        /*
         List<BoundsInt> chokepoints = new List<BoundsInt>(map.ChokePoints);
 
         for (int i = 0; i < map.ChokePoints.Count; i++)
@@ -433,7 +433,7 @@ public class MapPopulator
         }
 
         List<GameObject> traps = new List<GameObject>();
-        Bounds playerBounds = new Bounds(player.transform.position, new Vector3(1, 1));
+        Bounds playerBounds = new Bounds(Vector3.zero, new Vector3(1, 1));//new Bounds(player.transform.position, new Vector3(1, 1));
         foreach (MapNode room in map.Cells)
         {
             if (room == spawnRoom)
@@ -441,18 +441,20 @@ public class MapPopulator
                 continue;
             }
 
-            int trapCount = Mathf.RoundToInt(room.Cell.Area() * _random.Range(0.0f, 0.02f));
+            int trapCount = Mathf.RoundToInt(room.Cell.Area() * _random.Range(0.0f, parameters.TrapDensity));
             for (int i = 0; i < trapCount; i++)
             {
-                GameObject trapType = _trapContainer.GetRandomTrap();
-                Vector2 position = map.GetRandomPositionInRoom(3, 3, room);
+                (GameObject, Trap) trapType = _trapContainer.GetRandomTrap();
+                Bounds bounds = trapType.Item2.Bounds;
+                bounds.size += new Vector3(1, 1, 0);
+                Vector2 position = map.GetRandomPositionInRoom((int)bounds.size.x, (int)bounds.size.y, room);
 
                 if (position == Vector2.zero)
                 {
                     continue;
                 }
 
-                Bounds bounds = new Bounds(position, new Vector3(3, 3));
+                bounds.center = position;
                 bool intersects = false;
 
                 if (bounds.Intersects(playerBounds))
@@ -487,11 +489,10 @@ public class MapPopulator
 
                 if (!intersects)
                 {
-                    map.AddInteractiveObject(GameObject.Instantiate(trapType, position, Quaternion.identity));
+                    map.AddInteractiveObject(GameObject.Instantiate(trapType.Item1, position, Quaternion.identity));
                 }
             }
         }
-        */
     }
 
     private void SpawnSpawnables(Map map, int level, /*Player player,*/ Tuple<MapNode, MapNode> startAndGoal)

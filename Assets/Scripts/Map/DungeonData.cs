@@ -18,11 +18,11 @@ public class DungeonData :   MonoBehaviour
     public TileContainer PitSet;
 
     //[SerializeField]
-    //public TrapContainer trapSet;
-
-    //[SerializeField]
     //public SpawnableContainer spawnables;
 
     [SerializeField]
     public InteractiveDungeonObjectContainer InteractiveObjects;
+
+    [SerializeField]
+    public TrapContainer TrapSet;
 }
