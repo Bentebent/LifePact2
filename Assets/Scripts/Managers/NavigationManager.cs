@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-public class NavigationManager : MonoBehaviour
+public class NavigationManager
 {
     #region Internal nav classes
     internal class NavNodeComparar : IComparer<NavNode>

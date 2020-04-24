@@ -27,7 +27,7 @@ public class MapManager : MonoBehaviour
     private Tilemap _pitCollision = null;
 
     [SerializeField]
-    private NavigationManager _navigation = null;
+    private SpriteRenderer _fogOfWarRenderer = null;
 
     public Map Map => _map;
     public NavigationManager Navigation => _navigation;
@@ -35,6 +35,9 @@ public class MapManager : MonoBehaviour
 
     private Map _map = null;
     private MapGenerator _mapGenerator = null;
+    private FogOfWar _fogOfWar = null;
+    private NavigationManager _navigation = null;
+
     private static MapManager _instance = null;
     public static MapManager Instance
     {
@@ -59,9 +62,12 @@ public class MapManager : MonoBehaviour
 
     private void Awake()
     {
+        _navigation = new NavigationManager();
         _mapGenerator = new MapGenerator();
         _mapGenerator.Initialize(_navigation, _dungeonData, _floor, _walls, _pits, _statistics, _collision, 
             _pitCollision);
+
+        _fogOfWar = new FogOfWar();
     }
 
     private void Start()
@@ -79,7 +85,10 @@ public class MapManager : MonoBehaviour
 
     private void Update()
     {
-        
+        if (_map != null)
+        {
+            _fogOfWar.UpdateFogOfWar(Camera.main.transform.position, 30.0f, ref _fogOfWarRenderer);
+        }
     }
 
     public void GenerateMap(long seed, int level)
@@ -90,6 +99,7 @@ public class MapManager : MonoBehaviour
         }
 
         _map = _mapGenerator.GenerateMap(seed, level);
+        _fogOfWar.GenerateTexture(_floor, _walls, ref _fogOfWarRenderer);
     }
 
     public void PopulateMap(int level)
