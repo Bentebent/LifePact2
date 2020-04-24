@@ -300,6 +300,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4405368740491120035, guid: a320eeb979a58294e84da6e4aaccc333,
+        type: 3}
+      propertyPath: _fogOfWarEnabled
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 8184068406837332911, guid: a320eeb979a58294e84da6e4aaccc333, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: a320eeb979a58294e84da6e4aaccc333, type: 3}

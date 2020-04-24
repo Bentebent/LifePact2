@@ -28,6 +28,8 @@ public class MapManager : MonoBehaviour
 
     [SerializeField]
     private SpriteRenderer _fogOfWarRenderer = null;
+    [SerializeField]
+    private bool _fogOfWarEnabled = true;
 
     public Map Map => _map;
     public NavigationManager Navigation => _navigation;
@@ -85,10 +87,21 @@ public class MapManager : MonoBehaviour
 
     private void Update()
     {
-        if (_map != null)
+        if (_map != null && _fogOfWarEnabled)
         {
             _fogOfWar.UpdateFogOfWar(Camera.main.transform.position, 30.0f, ref _fogOfWarRenderer);
         }
+    }
+
+    public void ToggleFogOfWar(bool visible)
+    {
+        if (visible && !_fogOfWarEnabled)
+        {
+            _fogOfWar.GenerateTexture(_floor, _walls, ref _fogOfWarRenderer);
+        }
+
+        _fogOfWarEnabled = visible;
+        _fogOfWarRenderer.enabled = _fogOfWarEnabled;
     }
 
     public void GenerateMap(long seed, int level)
@@ -99,7 +112,11 @@ public class MapManager : MonoBehaviour
         }
 
         _map = _mapGenerator.GenerateMap(seed, level);
-        _fogOfWar.GenerateTexture(_floor, _walls, ref _fogOfWarRenderer);
+
+        if (_fogOfWarEnabled)
+        {
+            _fogOfWar.GenerateTexture(_floor, _walls, ref _fogOfWarRenderer);
+        }
     }
 
     public void PopulateMap(int level)
