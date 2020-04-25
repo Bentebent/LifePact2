@@ -45,21 +45,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   FloorTiles:
     _values:
-    - {fileID: 11400000, guid: c43f07c6a33ebde4da82d8ced9feb26a, type: 2}
-    - {fileID: 11400000, guid: 920d52b3d24165e4598aa2a0cb3d39a6, type: 2}
-    - {fileID: 11400000, guid: d9820a7007366b24a837e59ad39437c9, type: 2}
-    - {fileID: 11400000, guid: d71f97e888723374bb0a95c035dd2419, type: 2}
-    _priorities: 0a000000010000000100000001000000
-    _totalPriority: 13
-  TopRight: {fileID: 11400000, guid: f603680cad44b0b40856a25721f4d225, type: 2}
-  TopMiddle: {fileID: 11400000, guid: 3597784e0b994834d8e12d79b82cf06a, type: 2}
-  TopLeft: {fileID: 11400000, guid: d6192e934c6f23149a048733fd54e72a, type: 2}
-  MiddleLeft: {fileID: 11400000, guid: 309b95eb8291d964582e43689b5ac29a, type: 2}
-  MiddleRight: {fileID: 11400000, guid: 68721f47920414540936ddeb049b426c, type: 2}
-  BottomRight: {fileID: 11400000, guid: f897063eeaf1c4c438e69932dae82538, type: 2}
-  BottomMiddle: {fileID: 11400000, guid: 2ffe23d32a7d6b2479629c51c069ac32, type: 2}
-  BottomLeft: {fileID: 11400000, guid: 1e720305cb04e384cac35b56ad81e721, type: 2}
-  TopRightOuter: {fileID: 11400000, guid: 3d0ecae5a900d3243b897b6599244b68, type: 2}
-  TopLeftOuter: {fileID: 11400000, guid: 8b7cbac26514daf47af4aaa761d71264, type: 2}
-  BottomRightOuter: {fileID: 11400000, guid: 33fd1efc21121214ca947074c7cd999d, type: 2}
-  BottomLeftOuter: {fileID: 11400000, guid: 89a74e402b11e1b428e9cbbaffcd6545, type: 2}
+    - {fileID: 11400000, guid: b05b8b6963e3a8640acebef59806cd31, type: 2}
+    _priorities: 0a000000
+    _totalPriority: 10
+  TopRight: {fileID: 11400000, guid: 56f1a6e684182b243bf71c0a98dc54d0, type: 2}
+  TopMiddle: {fileID: 11400000, guid: d8f0a1a7bf51b5844b73be2fb45cbf4c, type: 2}
+  TopLeft: {fileID: 11400000, guid: 7e67c26e2007fc8459559e9cf3d199c2, type: 2}
+  MiddleLeft: {fileID: 11400000, guid: 74834477ec224e74e8fc7489b16ba581, type: 2}
+  MiddleRight: {fileID: 11400000, guid: 74834477ec224e74e8fc7489b16ba581, type: 2}
+  BottomRight: {fileID: 11400000, guid: ecea51b5a90fde4489644f99601f5d1d, type: 2}
+  BottomMiddle: {fileID: 11400000, guid: d8f0a1a7bf51b5844b73be2fb45cbf4c, type: 2}
+  BottomLeft: {fileID: 11400000, guid: ce87ed3e11f02274e99ad9bf73eb02b0, type: 2}
+  TopRightOuter: {fileID: 11400000, guid: 56f1a6e684182b243bf71c0a98dc54d0, type: 2}
+  TopLeftOuter: {fileID: 11400000, guid: 7e67c26e2007fc8459559e9cf3d199c2, type: 2}
+  BottomRightOuter: {fileID: 11400000, guid: ecea51b5a90fde4489644f99601f5d1d, type: 2}
+  BottomLeftOuter: {fileID: 11400000, guid: ce87ed3e11f02274e99ad9bf73eb02b0, type: 2}
