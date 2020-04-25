@@ -47,12 +47,11 @@ public class MapPopulator
             startAndGoal = new Tuple<MapNode, MapNode>(startAndGoal.Item2, startAndGoal.Item1);
         }
 
-        //player.transform.position = map.GetRandomPositionInRoom(1, 1, startAndGoal.Item1).ToVector3();
-        //CameraManager.Instance.SetCameraPosition(player.transform.position);
+        map.PlayerSpawnPosition = map.GetRandomPositionInRoom(1, 1, startAndGoal.Item1).ToVector3();
 
-        //map.AddInteractiveObject(GameObject.Instantiate(_interactiveObjectContainer.Stairs,
-        //    map.GetRandomPositionInRoom(2, 2, startAndGoal.Item2).ToVector3(), Quaternion.identity));
-        //startAndGoal.Item2.ContainsStairs = true;
+        map.AddInteractiveObject(GameObject.Instantiate(_interactiveObjectContainer.Stairs,
+            map.GetRandomPositionInRoom(2, 2, startAndGoal.Item2).ToVector3(), Quaternion.identity));
+        startAndGoal.Item2.ContainsStairs = true;
 
         _timer.Start();
 
@@ -433,7 +432,7 @@ public class MapPopulator
         }
 
         List<GameObject> traps = new List<GameObject>();
-        Bounds playerBounds = new Bounds(Vector3.zero, new Vector3(1, 1));//new Bounds(player.transform.position, new Vector3(1, 1));
+        Bounds playerBounds = new Bounds(map.PlayerSpawnPosition, new Vector3(1, 1));
         foreach (MapNode room in map.Cells)
         {
             if (room == spawnRoom)

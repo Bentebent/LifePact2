@@ -8,6 +8,8 @@ public class MapGenDebug : MonoBehaviour
     public long Seed;
     public int Level;
 
+    public GameObject PlayerContainerPrefab = null;
+
     private void Start()
     {
         MapManager.Instance.DrawDebug = true;
@@ -34,5 +36,13 @@ public class MapGenDebug : MonoBehaviour
         {
             MapManager.Instance.GenerateMap(++Seed, Level);
         }
+
+        if (Input.GetKeyDown(KeyCode.O))
+        {
+            GameObject playerGO = Instantiate(PlayerContainerPrefab, MapManager.Instance.Map.PlayerSpawnPosition,
+                Quaternion.identity);
+        }
+
+        EventContainer.UPDATE_FOG_OF_WAR.Dispatch((Camera.main.transform.position, 30.0f));
     }
 }

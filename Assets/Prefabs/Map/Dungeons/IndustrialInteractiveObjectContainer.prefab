@@ -43,7 +43,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d9e6adb88072af84684d3b18bcc1883a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Stairs: {fileID: 0}
+  Stairs: {fileID: 1850256325505874734, guid: b2ced7f3a725e5840af63aef13461c53, type: 3}
   horizontalDoor: {fileID: 5692808808640164717, guid: 0d7d9485006e1d54e9fa88e9be1316da,
     type: 3}
   verticalDoor: {fileID: 3324331348743788197, guid: 9e08c2eeec9bf244db2bbffd6ed6e18d,

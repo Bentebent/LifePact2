@@ -70,6 +70,8 @@ public class MapManager : MonoBehaviour
             _pitCollision);
 
         _fogOfWar = new FogOfWar();
+
+        EventContainer.UPDATE_FOG_OF_WAR.AddListener(UpdateFogOfWar);
     }
 
     private void Start()
@@ -87,9 +89,14 @@ public class MapManager : MonoBehaviour
 
     private void Update()
     {
+        
+    }
+
+    public void UpdateFogOfWar((Vector3 position, float viewDistance) data)
+    {
         if (_map != null && _fogOfWarEnabled)
         {
-            _fogOfWar.UpdateFogOfWar(Camera.main.transform.position, 30.0f, ref _fogOfWarRenderer);
+            _fogOfWar.UpdateFogOfWar(data.position, data.viewDistance, ref _fogOfWarRenderer);
         }
     }
 

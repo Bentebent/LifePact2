@@ -21,6 +21,8 @@ public class Map
     public List<GameObject> InteractiveObjects { get; }
     public List<GameObject> Enemies { get; }
 
+    public Vector3 PlayerSpawnPosition { get; set; }
+
     private readonly bool _drawCells;
     private readonly bool _drawDelaunay;
     private readonly bool _drawGabriel;
