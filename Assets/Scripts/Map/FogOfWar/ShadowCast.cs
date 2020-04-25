@@ -9,8 +9,27 @@ public static class ShadowCast
         Vector3Int boundsPosition = new Vector3Int(bounds.size.x / 2, bounds.size.y / 2, 0);
         Vector3 positionFrac = new Vector3(position.x - (int)position.x, position.y - (int)position.y);
 
-        ComputeFieldOfViewWithShadowCasting(boundsPosition.x, boundsPosition.y, bounds.size.x / 2, 
-            (x, y) => tiles[bounds.x + x, bounds.y + y].HasFlag(TileType.Wall), (x, y) => visibility[x, y] = 1f);
+        ComputeFieldOfViewWithShadowCasting(boundsPosition.x, boundsPosition.y, bounds.size.x / 2,
+            (x, y) => 
+            {
+
+                int nX = bounds.x + x;
+                int nY = bounds.y + y;
+
+                if (nX >= 0 && nY >= 0 && nX < tiles.GetLength(0) && nY < tiles.GetLength(1))
+                {
+                    return tiles[bounds.x + x, bounds.y + y].HasFlag(TileType.Wall);
+                }
+
+                return true;
+            },
+            (x, y) =>
+            {
+                if (x >= 0 && y >= 0 && x < visibility.GetLength(0) && y < visibility.GetLength(1))
+                {
+                    visibility[x, y] = 1f;
+                }
+            });
 
         float[,] visibilityTarget = new float[visibility.GetLength(0), visibility.GetLength(1)];
 

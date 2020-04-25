@@ -7278,7 +7278,7 @@ PrefabInstance:
     - target: {fileID: 4405368740491120035, guid: a320eeb979a58294e84da6e4aaccc333,
         type: 3}
       propertyPath: _fogOfWarEnabled
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a320eeb979a58294e84da6e4aaccc333, type: 3}
