@@ -79,9 +79,9 @@ public class MapManager : MonoBehaviour
 
     private void OnDrawGizmos()
     {
-        if (DrawDebug && _map != null)
+        if (DrawDebug)
         {
-            _map.DrawDebug();
+            _map?.DrawDebug();
         }
     }
 
@@ -106,13 +106,34 @@ public class MapManager : MonoBehaviour
 
     public void GenerateMap(long seed, int level)
     {
-        if (_map != null)
-        {
-            _map.ClearMap();
-        }
-
+        _map?.ClearMap();
         _map = _mapGenerator.GenerateMap(seed, level);
 
+        if (_fogOfWarEnabled)
+        {
+            _fogOfWar.GenerateTexture(_floor, _walls, ref _fogOfWarRenderer);
+        }
+    }
+
+    public void LoadSceneMap(List<GameObject> interactiveObjects = null, List<GameObject> enemies = null)
+    {
+        _map?.ClearMap();
+
+        if (interactiveObjects == null)
+        {
+            interactiveObjects = new List<GameObject>();
+            interactiveObjects.AddRange(GameObject.FindGameObjectsWithTag("InteractiveObject"));
+        }
+
+        if (enemies == null)
+        {
+            enemies = new List<GameObject>();
+            enemies.AddRange(GameObject.FindGameObjectsWithTag("Enemy"));
+        }
+
+        _map = new Map(_floor, _walls, _pits, _statistics, _collision, _pitCollision, new MillerParkLCG(), _navigation,
+            interactiveObjects, enemies);
+       
         if (_fogOfWarEnabled)
         {
             _fogOfWar.GenerateTexture(_floor, _walls, ref _fogOfWarRenderer);

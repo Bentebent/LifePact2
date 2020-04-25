@@ -66,6 +66,38 @@ public class Map
         CollisionMapCollider = collision.gameObject.GetComponent<TilemapCollider2D>();
     }
 
+    public Map(Tilemap floors, Tilemap walls, Tilemap pits, Tilemap statistics, Tilemap collision, Tilemap pitCollision,
+       LCG random, NavigationManager navigation, List<GameObject> interactiveObjects, List<GameObject> enemies)
+        : this(floors, walls, pits, statistics, collision, pitCollision, random, navigation)
+    {
+        InteractiveObjects = interactiveObjects;
+        Enemies = enemies;
+
+        Bounds = new BoundsInt(_walls.origin, _walls.size);
+        CollisionMap = new int[Bounds.size.x, Bounds.size.y];
+
+        for (int i = 0; i < CollisionMap.GetLength(0); i++)
+        {
+            for (int j = 0; j < CollisionMap.GetLength(1); j++)
+            {
+                CollisionMap[i, j] = 0;
+                Vector3Int pos = new Vector3Int(Bounds.xMin + i, Bounds.yMin + j, 0);
+
+                if (_walls.GetTile(pos) != null)
+                {
+                    CollisionMap[i, j] = 1;
+                }
+                else if(_pits.GetTile(pos) != null)
+                {
+                    CollisionMap[i, j] = 2;
+                }
+            }
+        }
+
+        UpdateCollisionTilemap(true);
+        UpdateCollisionTilemap(false);
+    }
+
     public void AddInteractiveObject(GameObject interactiveObject)
     {
         InteractiveObjects.Add(interactiveObject);
