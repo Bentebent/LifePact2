@@ -15,6 +15,8 @@ public class GameManager : MonoBehaviour
 
     private void Awake()
 	{
+        EventContainer.LEVEL_FINISHED.AddListener(LoadNextLevel);
+
         GenerateMap();
 	}
 	
@@ -27,11 +29,19 @@ public class GameManager : MonoBehaviour
     {
     }
 
+    private void LoadNextLevel()
+    {
+        _playerContainer.SetActive(false);
+
+        _currentLevel++;
+        GenerateMap();
+    }
+
     private void GenerateMap()
     {
         MapManager.Instance.GenerateMap(DateTime.Now.Ticks, _currentLevel);
         MapManager.Instance.PopulateMap(_currentLevel);
-        _playerContainer.transform.position = MapManager.Instance.Map.PlayerSpawnPosition;
+        _player.transform.position = MapManager.Instance.Map.PlayerSpawnPosition;
         _playerContainer.SetActive(true);
     }
 }

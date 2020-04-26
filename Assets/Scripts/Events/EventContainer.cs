@@ -4,10 +4,10 @@ using UnityEngine;
 
 public static class EventContainer
 {
-    public static readonly TypedEvent<Player> SPAWN_PLAYER = new TypedEvent<Player>();
+    public static readonly UntypedEvent LEVEL_FINISHED = new UntypedEvent();
 
     public static void ClearEventListeners()
     {
-        SPAWN_PLAYER.Clear();
+        LEVEL_FINISHED.Clear();
     }
 }

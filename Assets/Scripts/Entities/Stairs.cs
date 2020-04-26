@@ -18,4 +18,12 @@ public class Stairs : MonoBehaviour
     {
         
     }
+
+    public void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.layer == Layers.Player)
+        {
+            EventContainer.LEVEL_FINISHED.Dispatch();
+        }
+    }
 }

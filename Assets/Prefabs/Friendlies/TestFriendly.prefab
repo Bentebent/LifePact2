@@ -125,7 +125,7 @@ SortingGroup:
   m_Enabled: 1
   m_SortingLayerID: 1642980529
   m_SortingLayer: 2
-  m_SortingOrder: 0
+  m_SortingOrder: 1
 --- !u!114 &6032528883161418409
 MonoBehaviour:
   m_ObjectHideFlags: 0
