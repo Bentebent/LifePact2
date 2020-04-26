@@ -5,8 +5,18 @@ using UnityEngine;
 
 public class Player : MonoBehaviour, IBuffable
 {
+    //DEBUG
+    public SummoningSpell _debugSummoningSpell = null;
+    //DEBUG
+
     [SerializeField]
     private Rigidbody2D _rigidbody;
+
+    [SerializeField]
+    private float _maxMana = 0.0f;
+
+    [SerializeField]
+    private float _maxHealth = 0.0f;
 
     [SerializeField]
     private float _maxSpeed = 0.0f;
@@ -23,11 +33,19 @@ public class Player : MonoBehaviour, IBuffable
     private Vector3 _inputVector = Vector3.zero;
     private Vector3 _velocity = Vector3.zero;
 
+    private float _currentHealth = 0.0f;
+    private float _currentMana = 0.0f;
+
     private List<KeyType> _keys = null;
+    private List<GameObject> _minions = null;
 
     private void Awake()
     {
         _keys = new List<KeyType>();
+        _minions = new List<GameObject>();
+
+        _currentHealth = _maxHealth;
+        _currentMana = _maxMana;
     }
 
     private void Start()
@@ -38,6 +56,11 @@ public class Player : MonoBehaviour, IBuffable
     private void Update()
     {
         CalculateInputVector();
+
+        if (Keybindings.SpellCast)
+        {
+           _minions.AddRange(_debugSummoningSpell?.PerformSummon(transform.position, gameObject));
+        }
 
         MapManager.Instance.UpdateFogOfWar(transform.position, _viewDistance);
     }
@@ -104,6 +127,16 @@ public class Player : MonoBehaviour, IBuffable
                 _velocity.y = 0f;
             }
         }
+    }
+
+    public void Teleport(Vector3 newPosition)
+    {
+        _minions?.ForEach(x =>
+        {
+            x.transform.position = newPosition;
+        });
+
+        transform.position = newPosition;
     }
 
     public void AddKey(KeyType type)

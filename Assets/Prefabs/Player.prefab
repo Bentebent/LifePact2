@@ -47,7 +47,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5efbe96354acff4e9a1c295d53791b2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _debugSummoningSpell: {fileID: 6034477528800386533, guid: 17b5624017fb8204691a71cd1e48c26a,
+    type: 3}
   _rigidbody: {fileID: 10043723930902589}
+  _maxMana: 0
+  _maxHealth: 0
   _maxSpeed: 5
   _acceleration: 35
   _deceleration: 25

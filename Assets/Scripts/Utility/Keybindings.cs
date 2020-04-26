@@ -9,6 +9,8 @@ public class Keybindings
     public static float MoveUp => InputModes.HasFlag(InputMode.Player) && (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.UpArrow)) ? 1f : 0f;
     public static float MoveDown => InputModes.HasFlag(InputMode.Player) && (Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.DownArrow)) ? 1f : 0f;
     public static bool Attack => InputModes.HasFlag(InputMode.Player) && Input.GetMouseButton(0);
+    public static bool SpellCast => InputModes.HasFlag(InputMode.Player) && Input.GetMouseButtonDown(1);
+
     public static bool Reload => InputModes.HasFlag(InputMode.Player) && Input.GetKey(KeyCode.R);
     public static bool Use => InputModes.HasFlag(InputMode.Player) && Input.GetKeyDown(KeyCode.E);
     public static bool Dash => InputModes.HasFlag(InputMode.Player) && Input.GetKeyDown(KeyCode.Space);

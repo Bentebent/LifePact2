@@ -2,21 +2,20 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Friendly : MonoBehaviour, IBuffable
+public class Summon : MonoBehaviour, IBuffable
 {
     [SerializeField]
     protected Navigation _navigation = null;
 
     [SerializeField]
-    private float _idleMaxSpeed = 0.0f;
+    protected float _idleMaxSpeed = 0.0f;
 
     [SerializeField]
-    private float _maxSpeed = 0.0f;
+    protected float _maxSpeed = 0.0f;
 
-    public Player _owner;
-    protected AIState _state;
-
-    private float _timeLastTarget = 0.0f;
+    protected GameObject _owner = null;
+    protected AIState _state = AIState.IDLE;
+    protected float _timeLastTarget = 0.0f;
 
 	private void Awake()
 	{
@@ -37,8 +36,6 @@ public class Friendly : MonoBehaviour, IBuffable
 
                 break;
             case AIState.IDLE:
-
-
                 if (_navigation.AtDestination() && _timeLastTarget == float.MaxValue)
                 {
                     _timeLastTarget = Time.time;
@@ -48,13 +45,13 @@ public class Friendly : MonoBehaviour, IBuffable
                 if (Vector3.Distance(transform.position, _owner.transform.position) > 4.0f)
                 {
                     _navigation.SetMaxSpeed(_maxSpeed);
-                    _navigation.MoveTo(_owner.transform.position.ToVector2() + RandomPointInCircle(3.5f), true);
+                    _navigation.MoveTo(_owner.transform.position.ToVector2() + RandomHelper.RandomPointInCircle(0.5f), true);
                     _timeLastTarget = float.MaxValue;
                 }
                 else if (Time.time - _timeLastTarget > UnityEngine.Random.Range(6.0f, 10.0f))
                 {
                     _navigation.SetMaxSpeed(_idleMaxSpeed);
-                    _navigation.MoveTo(transform.position.ToVector2() + RandomPointInCircle(2.0f), true);
+                    _navigation.MoveTo(transform.position.ToVector2() + RandomHelper.RandomPointInCircle(2.0f), true);
                     _timeLastTarget = float.MaxValue;
                 }
 
@@ -66,15 +63,9 @@ public class Friendly : MonoBehaviour, IBuffable
         }
     }
 
-    protected Vector2 RandomPointInCircle(float radius)
+    public void SetOwner(GameObject owner)
     {
-        float r = radius * Mathf.Sqrt(UnityEngine.Random.Range(0.0f, 1.0f));
-        float theta = UnityEngine.Random.Range(0.0f, 1.0f) * 2 * Mathf.PI;
-
-        float x = r * Mathf.Cos(theta);
-        float y = r * Mathf.Sin(theta);
-
-        return new Vector2(x, y);
+        _owner = owner;
     }
 
     public bool ReceiveDamage(int damage, Vector2 velocity, bool maxHealth = false, bool spawnBloodSpray = true)

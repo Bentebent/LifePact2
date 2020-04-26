@@ -41,7 +41,7 @@ public class GameManager : MonoBehaviour
     {
         MapManager.Instance.GenerateMap(DateTime.Now.Ticks, _currentLevel);
         MapManager.Instance.PopulateMap(_currentLevel);
-        _player.transform.position = MapManager.Instance.Map.PlayerSpawnPosition;
+        _player.Teleport(MapManager.Instance.Map.PlayerSpawnPosition);
         _playerContainer.SetActive(true);
     }
 }
