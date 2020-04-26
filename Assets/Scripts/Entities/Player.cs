@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Player : MonoBehaviour
+public class Player : MonoBehaviour, IBuffable
 {
     [SerializeField]
     private Rigidbody2D _rigidbody;
@@ -96,5 +96,20 @@ public class Player : MonoBehaviour
                 _velocity.y = 0f;
             }
         }
+    }
+
+    public bool ReceiveDamage(int damage, Vector2 velocity, bool maxHealth = false, bool spawnBloodSpray = true)
+    {
+        throw new System.NotImplementedException();
+    }
+
+    public void AddStatusEffect(StatusEffect effect)
+    {
+        throw new System.NotImplementedException();
+    }
+
+    public void HandleStatusEffects()
+    {
+        throw new System.NotImplementedException();
     }
 }

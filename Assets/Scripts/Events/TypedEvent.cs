@@ -21,6 +21,11 @@ public class TypedEvent<T>
         _listeners.Remove(listener);
     }
 
+    public void Clear()
+    {
+        _listeners.Clear();
+    }
+
     public void Dispatch(T parameter)
     {
         for (int i = 0; i < _listeners.Count; ++i)

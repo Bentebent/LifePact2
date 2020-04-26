@@ -6,6 +6,8 @@ TagManager:
   tags:
   - InteractiveObject
   - Enemy
+  - Map
+  - Friendly
   layers:
   - Default
   - TransparentFX
@@ -15,12 +17,12 @@ TagManager:
   - UI
   - 
   - 
+  - Map
   - WallCollision
   - PitCollision
   - Player
-  - 
-  - 
-  - 
+  - Friendly
+  - Enemy
   - 
   - 
   - 

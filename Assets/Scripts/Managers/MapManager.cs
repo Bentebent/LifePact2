@@ -32,7 +32,6 @@ public class MapManager : MonoBehaviour
     private bool _fogOfWarEnabled = true;
 
     public Map Map => _map;
-    public NavigationManager Navigation => _navigation;
     public bool DrawDebug { get; set; }
 
     private Map _map = null;
@@ -150,5 +149,10 @@ public class MapManager : MonoBehaviour
     public void PopulateMap(int level)
     {
         _mapGenerator.PopulateMap(ref _map, level);
+    }
+
+    public List<Vector2Int> AStar(Vector2 origin, Vector2 target, out float distance)
+    {
+        return _navigation.AStar(_map.WorldToCell(origin), _map.WorldToCell(target), in _map, out distance);
     }
 }
