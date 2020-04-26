@@ -24,6 +24,8 @@ public class Navigation : MonoBehaviour
     private float _currentPathAge = 0.0f;
     private List<Vector2Int> _path = null;
 
+    public bool HasPath => (_path != null && _path.Count > 0) || (_currentPathAge >= _minPathAge);
+
     private void Awake()
 	{
         _minPathAge = Random.Range(3.0f, 5.0f);

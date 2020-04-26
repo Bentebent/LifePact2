@@ -39,6 +39,8 @@ public class Player : MonoBehaviour, IBuffable
     private List<KeyType> _keys = null;
     private List<GameObject> _minions = null;
 
+    public List<GameObject> Minions => _minions;
+
     private void Awake()
     {
         _keys = new List<KeyType>();
