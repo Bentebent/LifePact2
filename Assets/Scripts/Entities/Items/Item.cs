@@ -10,22 +10,26 @@ public abstract class Item : MonoBehaviour
     [SerializeField]
     private bool _destroyOnPickup = true;
 
+    [SerializeField]
+    private GameObject _visual = null;
+
     protected virtual void Apply(GameObject owner)
     {
         Player player = owner.GetComponent<Player>();
 
         if (player != null)
         {
-            ApplyEffect(owner);
+            ApplyEffect(player);
             _pickupSound?.Play();
 
             if (_destroyOnPickup)
             {
-                Destroy(gameObject);
+                _visual.SetActive(false);
+                Destroy(gameObject, _pickupSound.clip.length);
             }
         }
     }
-    private void OnTriggerStay2D(Collider2D collision)
+    private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject)
         {
@@ -33,5 +37,5 @@ public abstract class Item : MonoBehaviour
         }
     }
 
-    protected abstract void ApplyEffect(GameObject owner);
+    protected abstract void ApplyEffect(Player owner);
 }

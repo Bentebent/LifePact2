@@ -248,7 +248,7 @@ public class MapPopulator
             
             doors.ForEach(x =>
             {
-                x.IsGoalDoor = goldKey;
+                x.KeyType = goldKey ? KeyType.GOLD : KeyType.SKELETON;
             });
 
             return true;

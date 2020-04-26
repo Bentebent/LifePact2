@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 469242796136423245}
   - component: {fileID: 4199553056631969936}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: FogOfWar
   m_TagString: Untagged
   m_Icon: {fileID: 0}

@@ -35,10 +35,9 @@ public class Door : MonoBehaviour
     private bool _locked = true;
 
     public RectInt Bounds { get; set; }
-    public bool IsGoalDoor { get; set; }
-    public List<Door> Siblings = new List<Door>();
 
-  
+    public KeyType KeyType;
+    public List<Door> Siblings = new List<Door>();
 
     private void Awake()
 	{
@@ -89,7 +88,6 @@ public class Door : MonoBehaviour
 
     public void ToggleClosed(bool closed)
     {
-        Debug.Log(closed);
         if (!closed)
         {
             _animator.SetTrigger("OpenDoor");
@@ -121,22 +119,22 @@ public class Door : MonoBehaviour
             else if (_locked && _closed)
             {
                 Player player = collision.gameObject.GetComponent<Player>();
-                //if (player != null && Keybindings.Use)
-                //{
-                //    if (player.UseKey(this))
-                //    {
-                //        ToggleClosed(false);
-                //        Siblings.ForEach(x =>
-                //        {
-                //            x.ToggleClosed(false);
-                //        });
-                //    }
-                //    else
-                //    {
-                //        _audioSource.clip = _accessDenied;
-                //        _audioSource.Play();
-                //    }
-                //}
+                if (player != null && Keybindings.Use)
+                {
+                    if (player.UseKey(KeyType))
+                    {
+                        ToggleClosed(false);
+                        Siblings.ForEach(x =>
+                        {
+                            x.ToggleClosed(false);
+                        });
+                    }
+                    else
+                    {
+                        _audioSource.clip = _accessDenied;
+                        _audioSource.Play();
+                    }
+                }
             }
         }
     }

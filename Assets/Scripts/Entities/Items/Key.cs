@@ -2,15 +2,20 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+public enum KeyType
+{
+    GOLD,
+    SKELETON
+}
+
 public class Key : Item
 {
-    public Door Owner = null;
-    public bool IsGoldenKey = false;
+    [SerializeField]
+    private KeyType _type = KeyType.SKELETON;
 
-    public bool Consumed { get; set; }
-    protected override void ApplyEffect(GameObject owner)
+    protected override void ApplyEffect(Player owner)
     {
-        //Add key to player
+        owner.AddKey(_type);
     }
 
     private void Awake()

@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4104899135174140587}
   - component: {fileID: 3795520241078134099}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Collision
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -69,7 +69,7 @@ GameObject:
   - component: {fileID: 1488664268049774181}
   - component: {fileID: 3336847894955997785}
   - component: {fileID: 2876741955178917776}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: IndustrialVerticalDoor
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -115,6 +115,7 @@ MonoBehaviour:
   _closeOnExit: 1
   _closed: 1
   _locked: 1
+  KeyType: 0
   Siblings: []
 --- !u!50 &3336847894955997785
 Rigidbody2D:
@@ -135,7 +136,7 @@ Rigidbody2D:
   m_Material: {fileID: 0}
   m_Interpolate: 0
   m_SleepingMode: 1
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
   m_Constraints: 0
 --- !u!82 &2876741955178917776
 AudioSource:
@@ -248,7 +249,7 @@ GameObject:
   - component: {fileID: 2650199645709624216}
   - component: {fileID: 4205867864934716570}
   - component: {fileID: 3817848077674374912}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Visual
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -424,7 +425,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7132565493151718432}
   - component: {fileID: 6239343236920154808}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Trigger
   m_TagString: Untagged
   m_Icon: {fileID: 0}

@@ -42,7 +42,5 @@ public class MapGenDebug : MonoBehaviour
             GameObject playerGO = Instantiate(PlayerContainerPrefab, MapManager.Instance.Map.PlayerSpawnPosition,
                 Quaternion.identity);
         }
-
-        EventContainer.UPDATE_FOG_OF_WAR.Dispatch((Camera.main.transform.position, 30.0f));
     }
 }

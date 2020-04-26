@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class Player : MonoBehaviour, IBuffable
@@ -16,12 +17,17 @@ public class Player : MonoBehaviour, IBuffable
     [SerializeField]
     private float _deceleration = 0.0f;
 
+    [SerializeField]
+    private float _viewDistance = 0.0f;
+
     private Vector3 _inputVector = Vector3.zero;
     private Vector3 _velocity = Vector3.zero;
 
+    private List<KeyType> _keys = null;
+
     private void Awake()
     {
-
+        _keys = new List<KeyType>();
     }
 
     private void Start()
@@ -32,6 +38,8 @@ public class Player : MonoBehaviour, IBuffable
     private void Update()
     {
         CalculateInputVector();
+
+        MapManager.Instance.UpdateFogOfWar(transform.position, _viewDistance);
     }
 
     private void FixedUpdate()
@@ -96,6 +104,22 @@ public class Player : MonoBehaviour, IBuffable
                 _velocity.y = 0f;
             }
         }
+    }
+
+    public void AddKey(KeyType type)
+    {
+        _keys.Add(type);
+    }
+
+    public bool UseKey(KeyType type)
+    {
+        if (_keys.Contains(type))
+        {
+            _keys.Remove(type);
+            return true;
+        }
+
+        return false;
     }
 
     public bool ReceiveDamage(int damage, Vector2 velocity, bool maxHealth = false, bool spawnBloodSpray = true)
